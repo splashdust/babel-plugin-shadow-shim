@@ -1,0 +1,46 @@
+{
+  "name": "babel-plugin-shadow-shim",
+  "version": "1.0.0",
+  "description": "A babel plugin to helps complete apps to run inside a ShadowRoot, by automatically rewriting DOM code to look inside the shadow root.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/splashdust/babel-plugin-shadow-shim.git"
+  },
+  "keywords": [
+    "babel",
+    "shadow",
+    "dom",
+    "shadow",
+    "root"
+  ],
+  "author": "Joacim Magnusson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/splashdust/babel-plugin-shadow-shim/issues"
+  },
+  "homepage": "https://github.com/splashdust/babel-plugin-shadow-shim#readme",
+  "peerDependencies": {
+    "@babel/core": "^7.20.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/generator": "^7.20.7",
+    "@babel/template": "^7.20.7",
+    "@babel/traverse": "^7.20.12",
+    "@babel/types": "^7.20.7",
+    "@types/babel__generator": "^7.6.4",
+    "@types/babel__template": "^7.4.1",
+    "@types/babel__traverse": "^7.18.3",
+    "@types/babel-types": "^7.0.11",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-node-externals": "^3.0.0"
+  }
+}
