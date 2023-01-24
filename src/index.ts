@@ -89,7 +89,7 @@ export default function (): PluginObj  {
           `
         function ${WRAPPER_FUNC}${appIdentifier}(ogDOMRef, methodName) {
           // shadow-shim-ignore
-          const shadowRoot = document.querySelector('${rootSel}').shadowRoot ?? document
+          const shadowRoot = document.querySelector('${rootSel}')?.shadowRoot ?? document
 
           if (methodName === 'getElementById' || ogDOMRef === document) {
             return shadowRoot
