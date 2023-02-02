@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-shadow-shim",
-  "version": "1.0.0",
+  "version": "0.0.0-semantically-released",
   "description": "A babel plugin to helps complete apps to run inside a ShadowRoot, by automatically rewriting DOM code to look inside the shadow root.",
   "main": "dist/bundle.js",
   "scripts": {
@@ -15,6 +15,9 @@
   "files": [
     "dist/"
   ],
+  "release": {
+    "branches": [ "main" ]
+  },
   "keywords": [
     "babel",
     "shadow",
