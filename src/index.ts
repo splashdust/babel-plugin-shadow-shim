@@ -108,9 +108,7 @@ export default function (): PluginObj  {
       },
     },
     post() {
-      console.log();
       console.log("Done!");
-      console.log();
     },
   };
 };
