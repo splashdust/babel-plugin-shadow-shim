@@ -87,17 +87,19 @@ export default function (): PluginObj  {
         const rootSel = state.opts?.shadowRootSelector;
         const func_shadowShimWrapper = template(
           `
-        function ${WRAPPER_FUNC}${appIdentifier}(ogDOMRef, methodName) {
+        function ${WRAPPER_FUNC}${appIdentifier}(ogDomRef, methodName) {
           // shadow-shim-ignore
           const shadowRoot = document.querySelector('${rootSel}')?.shadowRoot ?? document
 
-          if (methodName === 'getElementById' || ogDOMRef === document) {
+          if (methodName === 'getElementById' || ogDomRef === document) {
             return shadowRoot
           }
 
-          // If we're not doing getElementById and the original ref is not 'document',
-          // then we'll return the original ref here.
-          return ogDOMRef
+          ${''// If we're not doing `getElementById` and the original ref is not 'document',
+              // then we'll assume that the query is called on a specific sub tree and we'll
+              // pass the original reference back.
+          }
+          return ogDomRef
         }
         `,
           { preserveComments: true }

@@ -5,12 +5,11 @@ __SDOMRef__myUniqueId(doc.ref.in.object, "querySelector").querySelector("#sel");
 wrappedInFunctionCall(
   __SDOMRef__myUniqueId(document, "querySelector").querySelector("#sel")
 );
-function __SDOMRef__myUniqueId(ogDOMRef, methodName) {
+function __SDOMRef__myUniqueId(ogDomRef, methodName) {
   // shadow-shim-ignore
   const shadowRoot = document.querySelector("#shadow")?.shadowRoot ?? document;
-  if (methodName === "getElementById" || ogDOMRef === document) {
+  if (methodName === "getElementById" || ogDomRef === document) {
     return shadowRoot;
-  } // If we're not doing getElementById and the original ref is not 'document',
-  // then we'll return the original ref here.
-  return ogDOMRef;
+  }
+  return ogDomRef;
 }
