@@ -32,7 +32,7 @@ const unsupportedDomMethods = [
 // in our wrapper function.
 const supportedDomMethodVisitor: Visitor = {
   Identifier: wrapDomRefAtPath,
-  MemberExpression: wrapDomRefAtPath
+  MemberExpression: wrapDomRefAtPath,
 };
 function wrapDomRefAtPath(
   path: NodePath<Identifier | MemberExpression>,
@@ -43,19 +43,23 @@ function wrapDomRefAtPath(
   path.replaceWithSourceString(
     `${WRAPPER_FUNC}${appIdentifier}(${ogDomRef.code}, '${state.domMethodName}')`
   );
-  process.stdout.write(` Patched!\n`);
+
+  if (state.opts?.debug === true) process.stdout.write(`Patched!\n`);
+
   path.stop();
 }
 
 function hasIgnoreComment(path: NodePath<Identifier>): boolean {
-  return path!
-    .findParent(parentPath => parentPath.node.leadingComments !== undefined)
-    ?.node?.leadingComments?.some(
-      (comment) => comment.value.trim() === "shadow-shim-ignore"
-    ) || false;
+  return (
+    path!
+      .findParent((parentPath) => parentPath.node.leadingComments !== undefined)
+      ?.node?.leadingComments?.some(
+        (comment) => comment.value.trim() === "shadow-shim-ignore"
+      ) || false
+  );
 }
 
-export default function (): PluginObj  {
+export default function (): PluginObj {
   return {
     visitor: {
       Identifier(path: NodePath<Identifier>, state: any) {
@@ -63,7 +67,10 @@ export default function (): PluginObj  {
 
         if (supportedDomMethods.includes(name)) {
           if (hasIgnoreComment(path)) return;
-          process.stdout.write(`--> Found ${name}...`);
+
+          if (state.opts?.debug === true)
+            process.stdout.write(`--> Found ${name}...\n`);
+
           path.parentPath.traverse(supportedDomMethodVisitor as Visitor, {
             domMethodName: name,
             opts: state.opts,
@@ -95,9 +102,10 @@ export default function (): PluginObj  {
             return shadowRoot
           }
 
-          ${''// If we're not doing `getElementById` and the original ref is not 'document',
-              // then we'll assume that the query is called on a specific sub tree and we'll
-              // pass the original reference back.
+          ${
+            "" // If we're not doing `getElementById` and the original ref is not 'document',
+            // then we'll assume that the query is called on a specific sub tree and we'll
+            // pass the original reference back.
           }
           return ogDomRef
         }
@@ -109,8 +117,5 @@ export default function (): PluginObj  {
         path.node.body.push(func_shadowShimWrapper() as Statement);
       },
     },
-    post() {
-      console.log("Done!");
-    },
   };
-};
+}
