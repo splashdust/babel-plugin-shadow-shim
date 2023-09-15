@@ -28,7 +28,8 @@ Then add the plugin and settings to your `.babelrc` plugins section:
     "shadow-shim",
     {
     "shadowRootSelector": "#shadow",
-    "appIdentifier": "myUniqueId"
+    "appIdentifier": "myUniqueId",
+    "debug": true
     }
   ]
 ]
@@ -37,6 +38,8 @@ Then add the plugin and settings to your `.babelrc` plugins section:
 `shadowRootSelector` is the selector of the element to which the shadow root is attached. Without this setting the plugin will not work.
 
 `appIdentifier` can be any random string, and is used to make sure the code the plugin generates is unique to this application and does not conflict with other instances of `babel-plugin-shadow-shim` on the same page.
+
+`debug` adds some logging to the console. Omit this option to avoid spamming your build logs!
 
 Make sure that your pipeline is set up so that babel runs at the last stage. You want the plugin to process all the output javascript.
 

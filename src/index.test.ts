@@ -4,7 +4,7 @@ import plugin from "./index";
 
 pluginTester({
   plugin,
-  pluginName: 'babel-plugin-shadow-shim',
+  pluginName: "babel-plugin-shadow-shim",
   pluginOptions: {
     shadowRootSelector: "#shadow",
     appIdentifier: "myUniqueId",
